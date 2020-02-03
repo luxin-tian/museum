@@ -20,7 +20,7 @@
 
 You need a token to start the task. I will secretly tell you the token you need:)
 
-```python
+```terminal
 >>> python3 spidering_museum_text.py
 please input your task token: *****
 Your digits are:
