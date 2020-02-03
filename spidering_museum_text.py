@@ -1,6 +1,7 @@
 import requests #for http requests
 import pandas as pd #gives us DataFrames
 import numpy as np
+import time
 from selenium import webdriver
 
 task_token = input('please input your task token: ')
@@ -25,8 +26,8 @@ def get_description(index, artwork_title, url):
     global exception
     pars_dict = {'index':[], 'artwork_title' : [], 'description_text' : [], 'url' : []}
     driver = webdriver.Chrome('./chromedriver')
-    driver.get(url)
     try: 
+        driver.get(url)
         descriptions = driver.find_element_by_class_name('o-blocks').find_elements_by_tag_name('p')
     except: 
         exception = 1
@@ -48,6 +49,10 @@ description_list = []
 description_df = pd.DataFrame()
 
 for index, artwork in artwork_df.iterrows(): 
+    if lb <= index < ub and (index - lb) % 10 == 0 and index != lb: 
+        time.sleep(10)
+    if lb <= index < ub and (index - lb) % 20 == 0 and index != lb:
+        time.sleep(10)
     if lb <= index < ub:
         title = artwork_df.loc[index]['collection']
         link = artwork_df.loc[index]['link']
