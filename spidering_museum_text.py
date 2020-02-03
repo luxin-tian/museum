@@ -49,9 +49,11 @@ description_list = []
 description_df = pd.DataFrame()
 
 for index, artwork in artwork_df.iterrows(): 
-    if lb <= index < ub and (index - lb) % 10 == 0 and index != lb: 
-        time.sleep(10)
-    if lb <= index < ub and (index - lb) % 20 == 0 and index != lb:
+    if lb <= index < ub and (index - lb) % 30 == 0 and index != lb:
+        print(f'Sleep for 120s to avoid censorship. You have finished {100*(index-lb)/(ub-lb)}%. ')
+        time.sleep(120)
+    elif lb <= index < ub and (index - lb) % 10 == 0 and index != lb: 
+        print(f'Sleep for 10s to avoid censorship. You have finished {100*(index-lb)/(ub-lb)}%. ')
         time.sleep(10)
     if lb <= index < ub:
         title = artwork_df.loc[index]['collection']
