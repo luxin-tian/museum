@@ -70,4 +70,4 @@ for description in description_list:
         description_df = description_df.append(para, ignore_index=True)
 
 
-description_df.to_csv(f'{exception}_artwork_description_{lb}_{ub}.csv', index=False)
+description_df.to_csv(f'{exception}_{index}_artwork_description_{lb}_{ub}.csv', index=False)
