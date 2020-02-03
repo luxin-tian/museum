@@ -24,7 +24,7 @@ You need a token to start the task. I will secretly tell you the token you need:
 >>> python3 spidering_museum_text.py
 please input your task token: *****
 Your digits are:
-0 1
+*****
 If this is not correct, please contact me and stop running this task.
 Starting task (enter 'y' to confirm starting): y
 Starting...
