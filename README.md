@@ -1,4 +1,4 @@
-# museum
+# A Content Analysis Project on the Webiste of the Art Institute of Chicago
 
 这个程序会从芝加哥艺术博物馆网站上爬取每一件展品的文字记载信息。由于网站设有最高访问量限制，需要大家帮我分散地爬取数据，谢谢老师们！
 
@@ -7,7 +7,10 @@
 ## Tutorials
 
 ### Install required packages
+Currently this program only runs on a Mac machine with Chrome v7.9 installed. 
+
 ```>>> pip install pandas numpy selenium```
+
 该程序还将使用[Chrome浏览器](https://www.google.com/chrome/)。
 
 ### Clone this repo
@@ -19,6 +22,8 @@
 ### Start exploring the Art Institute of Chicago
 
 You need a token to start the task. I will secretly tell you the token you need:)
+
+为了避免重复工作，请在每次运行前与我确认token！
 
 ```terminal
 >>> python3 spidering_museum_text.py
