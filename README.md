@@ -20,9 +20,9 @@ Currently this program only runs on a Mac machine with Chrome v7.9 installed.
 ```>>> cd \path\to\this\repo```
 
 ### If you are using Windows OS!
-Download the Chrome driver for Windows from [here](https://chromedriver.storage.googleapis.com/index.html?path=79.0.3945.36/), unsuppress and copy to this repo's path, and replace the `chromedriver` file in this repo with the driver you downloaded from this website. 
+Download the Chrome driver for Windows from [here](https://chromedriver.storage.googleapis.com/index.html?path=79.0.3945.36/), unsuppress and copy to this repo's path, and replace the `chromedriver` file in this repo with the driver you downloaded from this website. This is necessary even though you have Chrome installed. 
 
-This step allows the `selenium` package to controll the Chrome browser automatically. 
+This step allows the `selenium` package to controll Chrome automatically. 
 
 ### Start exploring the Art Institute of Chicago
 
