@@ -24,7 +24,7 @@ exception = 0
 def get_description(index, artwork_title, url): 
     global exception
     pars_dict = {'index':[], 'artwork_title' : [], 'description_text' : [], 'url' : []}
-    driver = webdriver.Chrome('chromedriver')
+    driver = webdriver.Chrome('./chromedriver')
     driver.get(url)
     try: 
         descriptions = driver.find_element_by_class_name('o-blocks').find_elements_by_tag_name('p')
