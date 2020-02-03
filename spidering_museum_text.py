@@ -2,6 +2,7 @@ import requests #for http requests
 import pandas as pd #gives us DataFrames
 import numpy as np
 from selenium import webdriver
+driver = webdriver.Chrome(executable_path=r'./chromedriver')
 
 task_token = input('please input your task token: ')
 task_range = task_token.split('_')
