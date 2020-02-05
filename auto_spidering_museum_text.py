@@ -76,6 +76,7 @@ def spidering(lb, ub):
 
 
 node = lb
+even_odd = 0
 while node < ub: 
     if ub - node <= 50: 
         spidering(node, ub)
@@ -84,6 +85,8 @@ while node < ub:
         if even_odd % 2 == 0:
             time.sleep(60 * 5)
         elif even_odd % 2 == 1: 
+            time.sleep(60*15)
+        if even_odd % 3 == 0: 
             time.sleep(60*15)
     even_odd += 1
     node += 50
