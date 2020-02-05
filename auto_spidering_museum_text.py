@@ -47,27 +47,39 @@ artwork_df = pd.read_csv('artwork_title_and_link.csv')
 
 
 # Spidering. 
-description_list = []
-description_df = pd.DataFrame()
+def spidering(lb, ub): 
+    description_list = []
+    description_df = pd.DataFrame()
 
-for index, artwork in artwork_df.iterrows(): 
-    if lb <= index < ub and (index - lb) % 30 == 0 and index != lb:
-        print(f'Sleep for 120s to avoid censorship. You have finished {100*(index-lb)/(ub-lb)}%. ')
-        time.sleep(120)
-    elif lb <= index < ub and (index - lb) % 10 == 0 and index != lb: 
-        print(f'Sleep for 10s to avoid censorship. You have finished {100*(index-lb)/(ub-lb)}%. ')
-        time.sleep(10)
-    if lb <= index < ub:
-        ready = get_description(index, artwork['collection'], artwork['link'])
-        if not isinstance(ready, pd.DataFrame): 
-            break
-        description_list.append(ready)
+    for index, artwork in artwork_df.iterrows(): 
+        if lb <= index < ub and (index - lb) % 30 == 0 and index != lb:
+            print(f'Sleep for 120s to avoid censorship. You have finished {100*(index-lb)/(ub-lb)}%. ')
+            time.sleep(120)
+        elif lb <= index < ub and (index - lb) % 10 == 0 and index != lb: 
+            print(f'Sleep for 10s to avoid censorship. You have finished {100*(index-lb)/(ub-lb)}%. ')
+            time.sleep(10)
+        if lb <= index < ub:
+            ready = get_description(index, artwork['collection'], artwork['link'])
+            if not isinstance(ready, pd.DataFrame): 
+                break
+            description_list.append(ready)
 
-for description in description_list: 
-    for index, para in description.iterrows():   
-        if para['description_text'] == '' or para['description_text'].startswith('Object information is'): 
-            continue
-        description_df = description_df.append(para, ignore_index=True)
+    for description in description_list: 
+        for index, para in description.iterrows():   
+            if para['description_text'] == '' or para['description_text'].startswith('Object information is'): 
+                continue
+            description_df = description_df.append(para, ignore_index=True)
 
 
-description_df.to_csv(f'{exception}_artwork_description_metadata_{lb}_{ub}.csv', index=False)
+    description_df.to_csv(f'{exception}_artwork_description_metadata_{lb}_{ub}.csv', index=False)
+
+
+
+node = lb
+while node < ub: 
+    if ub - node <= 50: 
+        spidering(node, ub)
+    else: 
+        spidering(node, node + 50)
+        time.sleep()
+    node += 50
