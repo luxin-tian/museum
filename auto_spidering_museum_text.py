@@ -81,5 +81,9 @@ while node < ub:
         spidering(node, ub)
     else: 
         spidering(node, node + 50)
-        time.sleep()
+        if even_odd % 2 == 0:
+            time.sleep(60 * 5)
+        elif even_odd % 2 == 1: 
+            time.sleep(60*15)
+    even_odd += 1
     node += 50
