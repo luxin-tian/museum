@@ -108,7 +108,10 @@ def spidering(lb, ub):
                 continue
             description_df = description_df.append(para, ignore_index=True)
 
-    print(f'{lb, index} is sucessfull')
+    if catch_exception == 1: 
+        print(f'{lb, exception[1]} is sucessfull, but the task is interupted. ')
+    else: 
+        print(f'{lb, ub} is sucessfull. ')
     description_df.to_csv(f'{exception}_artwork_description_metadata_{lb}_{ub}.csv', index=False)
 
 
@@ -124,6 +127,7 @@ def main(lb, ub):
                 print('The task has been censored, sleep for one hour and then resume. ')
                 lb = exception[1]
                 ub = ub
+                print('Sleep for 40mins to avoid censorship. ')
                 time.sleep(60*40)
                 break
         else: 
@@ -132,15 +136,19 @@ def main(lb, ub):
                 print('The task has been censored, sleep for one hour and then resume. ')
                 lb = exception[1]
                 ub = ub
+                print('Sleep for 40mins to avoid censorship. ')
                 time.sleep(60*40)
                 break
             if even_odd % 2 == 0:
+                print('Sleep for 5mins to avoid censorship. ')
                 time.sleep(60 * 5)
                 restart_driver()
             elif even_odd % 2 == 1: 
+                print('Sleep for 15mins to avoid censorship. ')
                 time.sleep(60*15)
                 restart_driver()
             if even_odd % 3 == 0: 
+                print('Sleep for 40mins to avoid censorship. ')
                 time.sleep(60*40)
                 restart_driver()
         even_odd += 1
@@ -151,6 +159,7 @@ def main(lb, ub):
         restart_driver()
         print(f'Restart from {lb}')
         main(lb, ub)
+    driver.close()
 
 start_driver()
 main(lb, ub)
