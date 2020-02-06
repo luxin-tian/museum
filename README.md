@@ -49,10 +49,10 @@ If this is not correct, please contact me and stop running this task.
 Starting task (enter 'y' to confirm starting): y
 Starting...
 
-Chrome will be automatically running on your computer.
+Chrome/Firefox will be automatically running on your computer.
 
 
-Chrome is running in a headless mode.
+Chrome/Firefox is running in a headless mode.
 Sleep for 10s to avoid censorship. You have finished 20.0%.
 Sleep for 10s to avoid censorship. You have finished 40.0%.
 Sleep for 120s to avoid censorship. You have finished 60.0%.
