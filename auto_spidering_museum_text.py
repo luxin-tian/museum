@@ -4,6 +4,13 @@ import numpy as np
 import time
 from selenium import webdriver
 
+print('Currently this script runs on macOS with Chrome v7.9 or Linux with Firefox')
+system = input('Select your OS (macOS/Linux): ')
+if system == 'macOS' and 'Chrome': 
+    driver_path = './chromedriver'
+elif system == 'Linux' and 'Firefox': 
+    driver_path = './geckodriver'
+
 task_token = input('please input your task token: ')
 task_range = task_token.split('_')
 lb = int(task_range[0])
@@ -25,7 +32,7 @@ exception = 0
 def get_description(index, artwork_title, url): 
     global exception
     pars_dict = {'index':[], 'artwork_title' : [], 'metadata': [], 'description_text' : [], 'url' : []}
-    driver = webdriver.Chrome('./chromedriver')
+    driver = webdriver.Chrome(driver_path)
     try: 
         driver.get(url)
         descriptions = driver.find_element_by_class_name('o-blocks').find_elements_by_tag_name('p')
@@ -87,6 +94,6 @@ while node < ub:
         elif even_odd % 2 == 1: 
             time.sleep(60*15)
         if even_odd % 3 == 0: 
-            time.sleep(60*15)
+            time.sleep(60*40)
     even_odd += 1
     node += 50
