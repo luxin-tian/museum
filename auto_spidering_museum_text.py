@@ -97,6 +97,7 @@ def spidering(lb, ub):
 
 
 def main(lb, ub): 
+    global catch_exception
     node = lb
     even_odd = 0
     while node < ub: 
