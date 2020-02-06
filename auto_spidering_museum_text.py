@@ -4,12 +4,20 @@ import numpy as np
 import time
 from selenium import webdriver
 
+
 print('Currently this script runs on macOS with Chrome v7.9 or Linux with Firefox')
 system = input('Select your OS (macOS/Linux): ')
+headless = input('Would you like to run with headless mode (not displaying)? y/n: ')
 if system == 'macOS': 
-    driver_path = webdriver.Chrome(executable_path='./chromedriver')
+    if headless == 'y': 
+        options = webdriver.chrome.options.Options()
+        options.headless = True
+    driver_path = webdriver.Chrome(options=options, executable_path='./chromedriver')
 elif system == 'Linux': 
-    driver_path = webdriver.Firefox(executable_path='./geckodriver')
+    if headless == 'y': 
+        options = webdriver.firefox.options.Options()
+        options.headless = True
+    driver_path = webdriver.Firefox(options=options, executable_path='./geckodriver')
 
 task_token = input('please input your task token: ')
 task_range = task_token.split('_')
