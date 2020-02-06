@@ -77,7 +77,7 @@ Sleep for 10s to avoid censorship. You have finished 80.0%.
 ### Send back the result
 There will be a .csv generated in the repo's folder. Please send it to me :_-_:
 
-### 声明
+### Declaration
 
 According to the [Terms](https://www.artic.edu/terms) of the website of the Art Institute of Chicago: 
 
