@@ -6,10 +6,10 @@ from selenium import webdriver
 
 print('Currently this script runs on macOS with Chrome v7.9 or Linux with Firefox')
 system = input('Select your OS (macOS/Linux): ')
-if system == 'macOS' and 'Chrome': 
-    driver_path = './chromedriver'
-elif system == 'Linux' and 'Firefox': 
-    driver_path = './geckodriver'
+if system == 'macOS': 
+    driver_path = webdriver.Chrome('./chromedriver')
+elif system == 'Linux': 
+    driver_path = webdriver.Firefox('./geckodriver')
 
 task_token = input('please input your task token: ')
 task_range = task_token.split('_')
