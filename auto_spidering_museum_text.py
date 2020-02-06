@@ -124,7 +124,7 @@ def main(lb, ub):
         if ub - node <= 50: 
             spidering(node, ub)
             if catch_exception == 1: 
-                print('The task has been censored, sleep for one hour and then resume. ')
+                print('The task has been censored. ')
                 lb = exception[1]
                 ub = ub
                 print('Sleep for 40mins to avoid censorship. ')
@@ -133,7 +133,7 @@ def main(lb, ub):
         else: 
             spidering(node, node + 50)
             if catch_exception == 1: 
-                print('The task has been censored, sleep for one hour and then resume. ')
+                print('The task has been censored. ')
                 lb = exception[1]
                 ub = ub
                 print('Sleep for 40mins to avoid censorship. ')
