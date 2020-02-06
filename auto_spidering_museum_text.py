@@ -103,12 +103,12 @@ def spidering(lb, ub):
             description_list.append(ready)
 
     for description in description_list: 
-        for index, para in description.iterrows():   
+        for sentence_index, para in description.iterrows():   
             if para['description_text'] == '' or para['description_text'].startswith('Object information is'): 
                 continue
             description_df = description_df.append(para, ignore_index=True)
 
-
+    print(f'{lb, index} is sucessfull')
     description_df.to_csv(f'{exception}_artwork_description_metadata_{lb}_{ub}.csv', index=False)
 
 
@@ -149,6 +149,7 @@ def main(lb, ub):
         print('Restarting...')
         catch_exception = 0
         restart_driver()
+        print(f'Restart from {lb}')
         main(lb, ub)
 
 start_driver()
