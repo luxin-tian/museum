@@ -83,4 +83,4 @@ According to the [Terms](https://www.artic.edu/terms) of the website of the Art 
 
 > Except as otherwise provided above, you may not copy, distribute, modify, transmit, download, or otherwise use the contents of the Site for commercial purposes without the express prior written permission of AIC. 
 
-Please DO NOT use this program and the content from the website of the Art Institute of Chicago for commercial purposes. The data I collected will be used for academic research. Any violation of the [Terms](https://www.artic.edu/terms) is subject to applicable laws in the United States. 
+__Please DO NOT use this program or the content from the website of the Art Institute of Chicago for commercial purposes. The data I collected will be used for academic research. Any violation of the [Terms](https://www.artic.edu/terms) is subject to applicable laws in the United States. __
