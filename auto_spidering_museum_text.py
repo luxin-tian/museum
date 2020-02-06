@@ -32,13 +32,18 @@ if not confirm == 'y':
     quit()
 print('Starting...')
 print('\nChrome will be automatically running on your computer. \n')
-print('Please DO NOT operate the automatically-running Chrome windows. This task usually takes 10 minutes, depending on your internet connection.')
-print('You may enjoy some pictures from the Art Institute of Chicago.\n')
+if headless == 'y': 
+    print()
+    print('Chrome is running in a headless mode. ')
+else: 
+    print()
+    print('Please DO NOT operate the automatically-running Chrome windows. This task can take hours, depending on your internet connection.')
+    print('You may enjoy some pictures from the Art Institute of Chicago.\n')
 
-exception = 0
 # Write a function that spider content from a link and returns a DataFrame. 
 def get_description(index, artwork_title, url): 
     global exception
+    exception = 0
     pars_dict = {'index':[], 'artwork_title' : [], 'metadata': [], 'description_text' : [], 'url' : []}
     driver = driver_path
     try: 
@@ -63,6 +68,7 @@ artwork_df = pd.read_csv('artwork_title_and_link.csv')
 
 # Spidering. 
 def spidering(lb, ub): 
+    global catch_exception
     description_list = []
     description_df = pd.DataFrame()
 
@@ -76,6 +82,7 @@ def spidering(lb, ub):
         if lb <= index < ub:
             ready = get_description(index, artwork['collection'], artwork['link'])
             if not isinstance(ready, pd.DataFrame): 
+                catch_exception = 1
                 break
             description_list.append(ready)
 
@@ -89,19 +96,37 @@ def spidering(lb, ub):
     description_df.to_csv(f'{exception}_artwork_description_metadata_{lb}_{ub}.csv', index=False)
 
 
+def main(lb, ub): 
+    node = lb
+    even_odd = 0
+    while node < ub: 
+        if ub - node <= 50: 
+            spidering(node, ub)
+            if catch_exception == 1: 
+                print('The task has been censored, sleep for one hour and then resume. ')
+                lb = exception[1]
+                ub = ub
+                time.sleep(60*40)
+                break
+        else: 
+            spidering(node, node + 50)
+            if catch_exception == 1: 
+                print('The task has been censored, sleep for one hour and then resume. ')
+                lb = exception[1]
+                ub = ub
+                time.sleep(60*40)
+                break
+            if even_odd % 2 == 0:
+                time.sleep(60 * 5)
+            elif even_odd % 2 == 1: 
+                time.sleep(60*15)
+            if even_odd % 3 == 0: 
+                time.sleep(60*40)
+        even_odd += 1
+        node += 50
+    if catch_exception == 1: 
+        print('Restarting...')
+        catch_exception = 0
+        main(lb, ub)
 
-node = lb
-even_odd = 0
-while node < ub: 
-    if ub - node <= 50: 
-        spidering(node, ub)
-    else: 
-        spidering(node, node + 50)
-        if even_odd % 2 == 0:
-            time.sleep(60 * 5)
-        elif even_odd % 2 == 1: 
-            time.sleep(60*15)
-        if even_odd % 3 == 0: 
-            time.sleep(60*40)
-    even_odd += 1
-    node += 50
+main(lb, ub)
