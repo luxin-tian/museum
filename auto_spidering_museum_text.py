@@ -1,4 +1,3 @@
-import requests #for http requests
 import pandas as pd #gives us DataFrames
 import numpy as np
 import time
@@ -45,7 +44,6 @@ def get_description(index, artwork_title, url):
     global exception
     exception = 0
     pars_dict = {'index':[], 'artwork_title' : [], 'metadata': [], 'description_text' : [], 'url' : []}
-    driver = driver_path
     try: 
         driver.get(url)
         descriptions = driver.find_element_by_class_name('o-blocks').find_elements_by_tag_name('p')
@@ -59,16 +57,34 @@ def get_description(index, artwork_title, url):
         pars_dict['metadata'].append(metadata.text)
         pars_dict['description_text'].append(para_text.text.strip())
         pars_dict['url'].append(url)
-    driver.close()
     return pd.DataFrame(pars_dict)
 
 # Read the csv file that stores the links of each artwork, prepare to spider the website. 
 artwork_df = pd.read_csv('artwork_title_and_link.csv')
 
+def start_driver(): 
+    global driver
+    if system == 'macOS': 
+        if headless == 'y': 
+            options = webdriver.chrome.options.Options()
+            options.headless = True
+        driver = webdriver.Chrome(options=options, executable_path='./chromedriver')
+    elif system == 'Linux': 
+        if headless == 'y': 
+            options = webdriver.firefox.options.Options()
+            options.headless = True
+        driver = webdriver.Firefox(options=options, executable_path='./geckodriver')
+
+
+def restart_driver(): 
+    global driver
+    driver.close
+    start_driver()
 
 # Spidering. 
 def spidering(lb, ub): 
     global catch_exception
+    catch_exception = 0
     description_list = []
     description_df = pd.DataFrame()
 
@@ -100,6 +116,7 @@ def main(lb, ub):
     global catch_exception
     node = lb
     even_odd = 0
+    start_driver()
     while node < ub: 
         if ub - node <= 50: 
             spidering(node, ub)
@@ -119,15 +136,20 @@ def main(lb, ub):
                 break
             if even_odd % 2 == 0:
                 time.sleep(60 * 5)
+                restart_driver()
             elif even_odd % 2 == 1: 
                 time.sleep(60*15)
+                restart_driver()
             if even_odd % 3 == 0: 
                 time.sleep(60*40)
+                restart_driver()
         even_odd += 1
         node += 50
     if catch_exception == 1: 
         print('Restarting...')
         catch_exception = 0
+        restart_driver()
         main(lb, ub)
 
+start_driver()
 main(lb, ub)
