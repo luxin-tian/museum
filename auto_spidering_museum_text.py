@@ -7,9 +7,9 @@ from selenium import webdriver
 print('Currently this script runs on macOS with Chrome v7.9 or Linux with Firefox')
 system = input('Select your OS (macOS/Linux): ')
 if system == 'macOS': 
-    driver_path = webdriver.Chrome('./chromedriver')
+    driver_path = webdriver.Chrome(executable_path='./chromedriver')
 elif system == 'Linux': 
-    driver_path = webdriver.Firefox('./geckodriver')
+    driver_path = webdriver.Firefox(executable_path='./geckodriver')
 
 task_token = input('please input your task token: ')
 task_range = task_token.split('_')
