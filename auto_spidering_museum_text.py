@@ -161,9 +161,9 @@ def main(lb, ub):
                 print('Sleep for 15mins to avoid censorship. ')
                 time.sleep(60*15)
                 restart_driver()
-            if even_odd % 3 == 0: 
-                print('Sleep for 40mins to avoid censorship. ')
-                time.sleep(60*40)
+            if even_odd % 3 == 2: 
+                print('Sleep for 30mins to avoid censorship. ')
+                time.sleep(60*30)
                 restart_driver()
         even_odd += 1
         node += 50
